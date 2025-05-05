@@ -35,19 +35,19 @@ export default function Hero(){
           <div className="flex w-fit gap-8 m-auto text-slate-600 text-sm md:text-md lg:text-lg">
             <div className="flex flex-col items-center justify-center gap-2">
               <div className="">
-                <PiCoffee className="text-2xl" />
+                <PiCoffee className="text-4xl" />
               </div>
               <p>Hot Coffee</p>
             </div>
             <div className="flex flex-col items-center justify-center gap-2">
               <div className="">
-                <CiCoffeeCup className="text-2xl" />
+                <CiCoffeeCup className="text-4xl" />
               </div>
               <p>Cup Coffee</p>
             </div>
             <div className="flex flex-col items-center justify-center gap-2">
               <div>
-                <SiBuymeacoffee className="text-2xl" />
+                <SiBuymeacoffee className="text-4xl" />
               </div>
               <p>Cold Coffee</p>
             </div>
