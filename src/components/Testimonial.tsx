@@ -16,7 +16,7 @@ export default function Testimonial(){
                 <GoStarFill />  
                 <GoStarFill />  
               </div>
-              <h1 className="font-bold text-[#6F4E37] text-3xl my-5">
+              <h1 className="font-bold text-[#6F4E37] text-2xl lg:text-3xl my-5">
                 "Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"
               </h1>
               <div className="flex gap-4 items-center">

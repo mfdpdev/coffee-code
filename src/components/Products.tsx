@@ -1,3 +1,4 @@
+import { CiShoppingCart } from "react-icons/ci";
 import { TbRosetteDiscountFilled } from "react-icons/tb";
 
 export default function Products(){
@@ -27,10 +28,15 @@ export default function Products(){
                 Lorem ipsum dolor sit amet
                 Lorem ipsum dolor sit amet
               </p>
-              <div className="flex gap-2 mt-4">
-                <span className="text-white bg-[#6f4e37] px-2 py-1 rounded-xl text-sm" >Category 1</span>
-                <span className="text-white bg-[#6f4e37] px-2 py-1 rounded-xl text-sm" >Category 1</span>
-                <span className="text-white bg-[#6f4e37] px-2 py-1 rounded-xl text-sm" >Category 1</span>
+              <div className="flex justify-between mt-4">
+                <div className="flex gap-2">
+                  <span className="text-white bg-[#6f4e37] px-2 py-1 rounded-lg text-sm" >Category 1</span>
+                  <span className="text-white bg-[#6f4e37] px-2 py-1 rounded-lg text-sm" >Category 2</span>
+                </div>
+                  <button className="text-white flex gap-2 bg-[#6f4e37] px-2 py-1 rounded-lg text-sm cursor-pointer" type="button" >
+                    <CiShoppingCart className="text-xl text-white" />
+                    Add to cart
+                  </button>
               </div>
             </div>
           </div>

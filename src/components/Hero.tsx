@@ -27,7 +27,7 @@ export default function Hero(){
             <p className="text-base md:text-md lg:text-lg" >50 % off on several items</p>
           </div>
         </div>
-        <div className="grid grid-rows-2 gap-4 md:gap-6 lg:gap-0">
+        <div id="menu" className="grid grid-rows-2 gap-4 md:gap-6 lg:gap-0">
             <form className="m-auto border-[#6f4e37] border p-1 rounded-full bg-white">
               <input type="text" className="px-4 text-slate-600 caret-slate-600 text-sm md:text-md lg:text-lg border-none focus:outline-none text-md" placeholder="Search here ..." />
               <button type="submit" className="bg-[#6f4e37] text-sm md:text-md lg:text-lg text-white px-4 py-2 cursor-pointer rounded-full" >Search</button>
