@@ -37,7 +37,7 @@ export default function Navbar<Props>({ value }){
           </div>
         </div>
       </div>
-      <div className={`sm:hidden fixed flex gap-4 flex-col ${value.navbar ? "right-0" :"-right-full"} duration-700 transition-all pb-22 p-4 z-999 h-screen w-full sm:w-1/2 lg:w-3/8 xl:w-1/4 bg-white shadow`}>
+      <div className={`sm:hidden fixed flex gap-4 flex-col ${value.navbar ? "right-0" :"-right-full"} duration-700 transition-all pb-22 p-4 z-999 h-dvh w-full sm:w-1/2 lg:w-3/8 xl:w-1/4 bg-white shadow`}>
         <div className="flex flex-col gap-4 md:gap-12 text-lg" >
           <a href="#aboutus" className="text-slate-600 cursor-pointer hover:text-[#6F4E37]" >About us</a>
           <a href="#menu" className="text-slate-600 cursor-pointer hover:text-[#6F4E37]" >Menu</a>

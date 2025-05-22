@@ -1,13 +1,15 @@
+import { useCart } from "../context/CartContext";
+
 interface Props {
   value: any
 }
 
 export default function Cart<Props>({ value }){
-  const data: number[] = [1,2,3,4,5];
+  const { cartItems, increaseItemQuantity, decreaseItemQuantity, getPaymentSummary } = useCart();
   return (
     <>
-      <div className={`fixed flex gap-4 flex-col ${value.cart ? "right-0" :"-right-full"} duration-700 transition-all pb-22 p-4 z-999 h-screen w-full sm:w-1/2 lg:w-3/8 xl:w-1/4 bg-white shadow`}>
-        {data.length < 1 ? (
+      <div className={`fixed flex gap-4 flex-col ${value.cart ? "right-0" :"-right-full"} duration-700 transition-all pb-22 p-4 z-999 h-dvh w-full sm:w-1/2 lg:w-3/8 xl:w-1/4 bg-white shadow`}>
+        {cartItems.length < 1 ? (
           <div className="h-full">
             Kosong
           </div>
@@ -16,7 +18,7 @@ export default function Cart<Props>({ value }){
         (
           <>
             <div className="flex flex-col gap-y-8 grow overflow-y-auto">
-            {data.map( (e, i) => {
+            {cartItems.map( (e, i) => {
               return (
                 <div key={i} className="flex items-center gap-4 w-full">
                   <input type="checkbox" />
@@ -29,9 +31,9 @@ export default function Cart<Props>({ value }){
                     <div className="flex justify-between w-full">
                       <h2 className="font-bold">$250.00</h2>
                       <div className="flex gap-4">
-                        <button className="px-3 bg-slate-200 text-slate-500 rounded">-</button>
-                        <p>1</p>
-                        <button className="px-3 bg-[#6F4E37] text-white rounded">+</button>
+                        <button onClick={() => decreaseItemQuantity(e.id)} className="px-3 bg-slate-200 text-slate-500 rounded cursor-pointer">-</button>
+                        <p>{e.quantity}</p>
+                        <button onClick={() => increaseItemQuantity(e.id)} className="px-3 bg-[#6F4E37] text-white rounded cursor-pointer">+</button>
                       </div>
                     </div>
                   </div>
@@ -39,7 +41,7 @@ export default function Cart<Props>({ value }){
               )
             })}
             </div>
-            <div className="flex flex-col gap-2 border border-slate-200 rounded-xl text-slate-600 font-bold p-4">
+            <div className="flex flex-col gap-2 border border-slate-200 rounded-xl text-slate-600 font-bold p-4 text-sm md:text-base">
               <h1>Payment Summary</h1> 
               <div className="flex justify-between">
                 <h3>Price</h3>
@@ -59,7 +61,7 @@ export default function Cart<Props>({ value }){
                 <div>$134.00</div>
               </div>
             </div>
-            <button className="bg-[#6F4E37] text-white py-3 rounded-xl font-bold">Checkout</button>
+            <button onClick={() => console.log(getPaymentSummary())} className="bg-[#6F4E37] text-white py-3 rounded-xl font-bold cursor-pointer">Checkout</button>
           </>
         )}
       </div>
