@@ -1,27 +1,11 @@
 import { CiShoppingCart } from "react-icons/ci";
 import { TbRosetteDiscountFilled } from "react-icons/tb";
 import { useCart } from "../context/CartContext";
-import { useEffect, useState } from "react";
+import { useData } from "../context/DataContext";
 
 export default function Products(){
-  // const data: number[] = [1,2,3,4,5,6];
-  const [data, setData] = useState(null)
   const { increaseItemQuantity } = useCart();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response1 = await fetch("https://api.sampleapis.com/coffee/hot");
-      const response2 = await fetch("https://api.sampleapis.com/coffee/hot");
-      // if(!response.ok){
-      // }
-
-      const result1 = await response1.json();
-      const result2 = await response2.json();
-      setData([...result1, ...result2]);
-    }
-
-    fetchData();
-  })
+  const { data } = useData();
 
   return (
     <>
@@ -40,15 +24,15 @@ export default function Products(){
             </div>
             <div className="mx-2">
               <div className="flex justify-between mt-4 text-slate-600" >
-                <h2 className="font-bold text-[#6F4E37] md:text-lg" >{e.title}</h2>
-                <p>$5.00</p>
+                <h2 className="font-bold text-[#6F4E37] md:text-lg" >{e.name}</h2>
+                <p>{e.price}</p>
               </div>
               <p className="text-slate-600 mt-4">
                 {e.description?.slice(0, 50) + "..."}
               </p>
               <div className="flex justify-between mt-4">
                 <div className="flex gap-2">
-                  <span className="text-white bg-[#6f4e37] px-2 py-1 rounded-lg text-sm" >Category 1</span>
+                  <span className="text-white bg-[#6f4e37] px-2 py-1 rounded-lg text-sm" >{e.category[0]}</span>
                 </div>
                   <button onClick={() => {
                     increaseItemQuantity(i);

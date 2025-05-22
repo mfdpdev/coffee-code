@@ -1,11 +1,59 @@
+import { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
-
-interface Props {
-  value: any
-}
+import { useData } from "../context/DataContext";
 
 export default function Cart<Props>({ value }){
   const { cartItems, increaseItemQuantity, decreaseItemQuantity, getPaymentSummary } = useCart();
+  const { data } = useData();
+  const [paymentSummary, setPaymentSummary] = useState(null);
+
+  const handlePayment = async () => {
+    const items = cartItems.map( (e, i) => {
+      return {
+        id: data[i].id,
+        price: data[i].price,
+        quantity: e.quantity,
+        name: data[i].name,
+      }
+    })
+
+    try {
+      const response = await fetch("http://localhost:3000/v1/api/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          total: paymentSummary?.total,
+          items,
+        })
+      });
+
+      const { token } = await response.json();
+
+      window.snap.pay(token, {
+        onSuccess: function(result) {
+          alert("Payment Success: " + JSON.stringify(result));
+        },
+        onPending: function(result) {
+          alert("Payment Pending: " + JSON.stringify(result));
+        },
+        onError: function(result) {
+          alert("Payment Error: " + JSON.stringify(result));
+        },
+        onClose: function() {
+          alert("You closed the popup without finishing the payment");
+        }
+      });
+    } catch (error) {
+      console.error("Error during payment:", error);
+    }
+  }
+
+  useEffect(() => {
+    setPaymentSummary(getPaymentSummary());
+  }, [cartItems]);
+
   return (
     <>
       <div className={`fixed flex gap-4 flex-col ${value.cart ? "right-0" :"-right-full"} duration-700 transition-all pb-22 p-4 z-999 h-dvh w-full sm:w-1/2 lg:w-3/8 xl:w-1/4 bg-white shadow`}>
@@ -45,23 +93,23 @@ export default function Cart<Props>({ value }){
               <h1>Payment Summary</h1> 
               <div className="flex justify-between">
                 <h3>Price</h3>
-                <div>$134.00</div>
+                <div>{paymentSummary?.price}</div>
               </div>
               <div className="flex justify-between">
                 <h3>Taxes</h3>
-                <div>$134.00</div>
+                <div>{paymentSummary?.taxes}</div>
               </div>
               <div className="flex justify-between">
                 <h3>Discount</h3>
-                <div>$134.00</div>
+                <div>{paymentSummary?.discount}</div>
               </div>
               <hr className="text-slate-200" />
               <div className="flex justify-between">
                 <h3>Total</h3>
-                <div>$134.00</div>
+                <div>{paymentSummary?.total}</div>
               </div>
             </div>
-            <button onClick={() => console.log(getPaymentSummary())} className="bg-[#6F4E37] text-white py-3 rounded-xl font-bold cursor-pointer">Checkout</button>
+            <button onClick={handlePayment} className="bg-[#6F4E37] text-white py-3 rounded-xl font-bold cursor-pointer">Checkout</button>
           </>
         )}
       </div>

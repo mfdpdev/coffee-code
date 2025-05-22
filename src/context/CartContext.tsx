@@ -1,9 +1,11 @@
 import { createContext, useContext, useState } from "react";
+import { useData } from "./DataContext";
 
 const CartContext = createContext(null);
 
 const CartProvider = ({ children }) => {
 
+  const { data } = useData();
   const [cartItems, setCartItems] = useState<{ id: number, quantity: number }[]>([]);
 
   function getItemQuantity(id: number){
@@ -44,27 +46,23 @@ const CartProvider = ({ children }) => {
   
   function getPaymentSummary(){
     let price = 0;
-    let taxes = 1;
-    let discount = 1;
+    let taxes = 0;
+    let discount = 0;
     let total = 0;
 
     if(cartItems.length < 1) return null;
 
-    cartItems.forEach( item => {
-      const product: any = {
-        price: 123,
-      }
-      price += (product.price * item.quantity);
+    cartItems.forEach( (item, i) => {
+      price += (data[i].price * item.quantity);
     });
 
     total += (price +  taxes - discount);
+
     const result = {
-      cartItems,
-      paymentSummary: {
-        price,
-        taxes,
-        total,
-      }
+      price,
+      taxes,
+      discount,
+      total,
     }
 
     return result;

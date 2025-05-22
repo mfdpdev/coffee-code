@@ -8,6 +8,7 @@ import Cart from './components/Cart'
 import AboutUs from './components/AboutUs'
 import Testimonial from './components/Testimonial'
 import CartProvider from './context/CartContext'
+import DataProvider from './context/DataContext'
 
 function App() {
 
@@ -17,16 +18,18 @@ function App() {
   return (
     <>
       <Navbar value={{ cart, setCart, navbar, setNavbar }} />
-      <CartProvider>
-        <Cart value={{ cart }} />
-        <div className="mt-18 px-4 lg:px-8">
-          <Hero />
-          <Products />
-          <Testimonial />
-          <AboutUs />
-          <Footer />
-        </div>
-      </CartProvider>
+      <DataProvider>
+        <CartProvider>
+          <Cart value={{ cart }} />
+          <div className="mt-18 px-4 lg:px-8">
+            <Hero />
+            <Products />
+            <Testimonial />
+            <AboutUs />
+            <Footer />
+          </div>
+        </CartProvider>
+      </DataProvider>
     </>
   )
 }
