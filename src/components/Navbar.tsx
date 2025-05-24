@@ -1,11 +1,7 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { CiShoppingCart } from "react-icons/ci";
 
-interface Props {
-  value: any;
-}
-
-export default function Navbar<Props>({ value }){
+export default function Navbar({ value }: { value: { cart: boolean; setCart: Dispatch<SetStateAction<boolean>>; navbar: boolean; setNavbar: Dispatch<SetStateAction<boolean>>; }}){
 
   return (
     <>

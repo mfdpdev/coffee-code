@@ -1,8 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, PropsWithChildren } from "react";
 
 const DataContext = createContext(null);
 
-export default function DataProvider({ children }){
+export default function DataProvider({ children }: PropsWithChildren){
 
   const [data, setData] = useState([])
 
@@ -28,7 +28,8 @@ export default function DataProvider({ children }){
   )
 };
 
-export const useData = () => {
+// export const useData = <T extends unknown>(): T => {
+export const useData = (): { data: { name: string; description: string; category: string[]; image: string; price: number; id: number; }[]} => {
   const result = useContext(DataContext);
-  return result;
+  return result!;
 }

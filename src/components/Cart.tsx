@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useData } from "../context/DataContext";
 
-export default function Cart<Props>({ value }){
+export default function Cart({ value }: { value: {cart: boolean }}){
   const { cartItems, increaseItemQuantity, decreaseItemQuantity, getPaymentSummary } = useCart();
   const { data } = useData();
-  const [paymentSummary, setPaymentSummary] = useState(null);
-
+  const [paymentSummary, setPaymentSummary] = useState<{ price: number, taxes: number, discount: number, total: number } | null>(null);
+    
   const handlePayment = async () => {
     const items = cartItems.map( (e, i) => {
       return {

@@ -1,9 +1,17 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, PropsWithChildren, useContext, useState } from "react";
 import { useData } from "./DataContext";
 
-const CartContext = createContext(null);
+type temp = {
+  getPaymentSummary: () => any,
+  cartItems: any[],
+  getItemQuantity: (id: number) => any
+  increaseItemQuantity: (id: number) => any
+  decreaseItemQuantity: (id: number) => any
+}
 
-const CartProvider = ({ children }) => {
+const CartContext = createContext<temp | null>(null);
+
+const CartProvider = ({ children }: PropsWithChildren ) => {
 
   const { data } = useData();
   const [cartItems, setCartItems] = useState<{ id: number, quantity: number }[]>([]);
@@ -68,6 +76,7 @@ const CartProvider = ({ children }) => {
     return result;
   }
 
+
   return (
     <>
       <CartContext.Provider value={{ getPaymentSummary, cartItems, getItemQuantity, increaseItemQuantity, decreaseItemQuantity }} >
@@ -79,7 +88,7 @@ const CartProvider = ({ children }) => {
 
 export default CartProvider;
 
-export const useCart = () => {
+export const useCart = (): temp => {
   const result = useContext(CartContext);
-  return result;
+  return result!;
 }
