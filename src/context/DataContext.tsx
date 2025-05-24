@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, PropsWithChildren } from "react";
+import { dataType } from "../types/data";
 
-const DataContext = createContext(null);
+const DataContext = createContext<dataType | null>(null);
 
 export default function DataProvider({ children }: PropsWithChildren){
 
@@ -29,7 +30,7 @@ export default function DataProvider({ children }: PropsWithChildren){
 };
 
 // export const useData = <T extends unknown>(): T => {
-export const useData = (): { data: { name: string; description: string; category: string[]; image: string; price: number; id: number; }[]} => {
+export const useData = (): dataType => {
   const result = useContext(DataContext);
   return result!;
 }

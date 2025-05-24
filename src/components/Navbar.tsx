@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction } from "react";
 import { CiShoppingCart } from "react-icons/ci";
+import { navbarType } from "../types/navbar";
 
-export default function Navbar({ value }: { value: { cart: boolean; setCart: Dispatch<SetStateAction<boolean>>; navbar: boolean; setNavbar: Dispatch<SetStateAction<boolean>>; }}){
+export default function Navbar({ value }: navbarType){
 
   return (
     <>

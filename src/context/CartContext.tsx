@@ -1,20 +1,13 @@
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 import { useData } from "./DataContext";
+import { cartItemType, cartType } from "../types/cart";
 
-type temp = {
-  getPaymentSummary: () => any,
-  cartItems: any[],
-  getItemQuantity: (id: number) => any
-  increaseItemQuantity: (id: number) => any
-  decreaseItemQuantity: (id: number) => any
-}
-
-const CartContext = createContext<temp | null>(null);
+const CartContext = createContext<cartType | null>(null);
 
 const CartProvider = ({ children }: PropsWithChildren ) => {
 
   const { data } = useData();
-  const [cartItems, setCartItems] = useState<{ id: number, quantity: number }[]>([]);
+  const [cartItems, setCartItems] = useState<cartItemType[]>([]);
 
   function getItemQuantity(id: number){
     return cartItems.find( item => item.id == id)?.quantity || 0;
@@ -88,7 +81,7 @@ const CartProvider = ({ children }: PropsWithChildren ) => {
 
 export default CartProvider;
 
-export const useCart = (): temp => {
+export const useCart = (): cartType => {
   const result = useContext(CartContext);
   return result!;
 }
